@@ -1,54 +1,35 @@
-import React, { useEffect, useReducer} from "react";
-import { initialState, reducer } from "./reducer";
-import { fetchMovies } from "../../api/api";
-import Movie from "../Movie/Movie";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import "./App.css";
 import logo from "../logo.png";
 import Login from '../Login/Login';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import Movies from "../Movies/Movies";
+import {MovieDetails} from "../Movie/Movie";
+
 
 
 
 const App=()=>{
-    const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    fetchMovies().then(jsonResponse => {
-      dispatch({
-        type: "SEARCH_MOVIES_SUCCESS",
-        payload: jsonResponse.Search
-      });
-    });
-  }, []);
-
-  const { movies, errorMessage, loading } = state;
-   
- 
 
   return (
     <div className="wrapper">
-      <img id="logo" src={logo}/>
+      <img id="logo" src={logo} alt="logo"/>
       <Router>
-      <div>
-         <Link to="/Login"> <button class="button"><span><a href="#">Login</a></span></button></Link>
-         <Route path="/Login" component={Login} />
-      </div>
-    </Router>
-       
-         
-      <h2>
-        <strong>Movies</strong>
-      </h2>
-      <div className="cards">
-        {loading && <span>loading...</span>}
-        {errorMessage && <span>{errorMessage}</span>}
-        {movies &&
-          movies.map((movie, index) => (
-            <Movie key={`${index}-${movie.Title}`} movie={movie} />
-          ))}
-      </div>
+        <div>
+          <Link to="/"><button class="button"><span>Home</span></button></Link>
+          <Link to="/Login"><button class="button"><span>Login</span></button></Link>
+          
+          <Switch>
+            <Route exact path="/" component={Movies} />
+            <Route path="/Login" component={Login} />
+            <Route exact path="/:id" component={MovieDetails} />
+          </Switch>
+        </div>
+      </Router>
     </div>
 
   );
 }
+
+
 export default App
