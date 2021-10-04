@@ -17,22 +17,59 @@ const Movie = ({ movie }) => {
 
 class MovieDetails extends React.Component {
   state = {
-    loadedMovie: null,
+    poster: null,
+    title: null,
+    type: null,
+    genre: null,
+    writer: null,
+    director: null,
+    actors: null,
+    country: null,
+    language: null,
+    released: null,
+    runtime: null,
+    plot: null,
   }
 
   componentDidMount(){
     console.log(this.props);
-    fetch(`${MOVIE_API_URL}&i=${this.props.match.params.id}`).then((response) => {
-      console.log(response.json());
-    });
+    fetch(`${MOVIE_API_URL}&i=${this.props.match.params.id}`).then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          poster : data.Poster,
+          title: data.Title,
+          type: data.Type,
+          genre: data.Genre,
+          writer: data.Writer,
+          director: data.Director,
+          actors: data.Actors,
+          country: data.Country,
+          language: data.Language,
+          released: data.Released,
+          runtime: data.Runtime,
+          plot: data.Plot,
+        })
+      });
   }
 
   render() {
 
     return (
       <div>
-        <br></br><hr></hr>
-        <h1>Movie Details: !</h1>
+        <br></br><br></br><hr></hr>
+        <img src={this.state.poster} />
+        <h1> Title: {this.state.title} </h1>
+        <h1> Type: {this.state.type} </h1>
+        <h1> Genre: {this.state.genre} </h1>
+        <h1> Writer: {this.state.writer} </h1>
+        <h1> Director: {this.state.director} </h1>
+        <h1> Actors: {this.state.actors} </h1>
+        <h1> Country: {this.state.country} </h1>
+        <h1> Language: {this.state.language} </h1>
+        <h1> Released: {this.state.released} </h1>
+        <h1> Runtime: {this.state.runtime} </h1>
+        <h1> Plot: {this.state.plot} </h1>
       </div>
 
     )
