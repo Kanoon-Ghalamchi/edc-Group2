@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import "./App.css";
 import logo from "../logo.png";
 import Login from '../Login/Login';
-import Movies from "../Movies/Movies";
+import Movies from "../../container/Movies/Movies";
 import {MovieDetails} from "../Movie/Movie";
 
 
@@ -18,7 +18,6 @@ const App=()=>{
         <div>
           <Link to="/"><button class="button"><span>Home</span></button></Link>
           <Link to="/Login"><button class="button"><span>Login</span></button></Link>
-          
           <Switch>
             <Route exact path="/" component={Movies} />
             <Route path="/Login" component={Login} />

@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, Fragment} from "react";
 import {Link} from "react-router-dom";
 import { initialState, reducer } from "./reducer";
 import { fetchMovies } from "../../api/api";
-import {Movie} from "../Movie/Movie";
+import {Movie} from "../../components/Movie/Movie";
 
 
 const Movies=() => {
